@@ -1,4 +1,5 @@
-import ColorForm from "../ColorForm/ColorForm";
+import  ColorForm  from "../ColorForm/ColorForm";
+import  ContrastChecker  from "../ContrastChecker/ContrastChecker";
 import "./Color.css";
 import { useState, useEffect } from "react";
 
@@ -66,7 +67,7 @@ export default function Color({ color, onDelete, onEdit }) {
       <button onClick={handleCopyToClipboard}>{copy}</button>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
-
+      <ContrastChecker color={color} />
       {confirm ? (
         <div className="color-card-highlight">
           <p>Really delete?</p>
