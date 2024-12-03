@@ -2,11 +2,13 @@ import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
-import { useState } from "react";
+//import { useState } from "react";
 import { uid } from "uid";
+import  useLocalStorageState  from "use-local-storage-state";
 
 function App() {
-  const [colors, setColors] = useState(initialColors);
+ // const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useLocalStorageState("colors",  {defaultValue: initialColors} );
   //console.log("colors: ", colors);
 
   function onSubmitColor(data) {
