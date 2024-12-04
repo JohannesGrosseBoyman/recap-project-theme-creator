@@ -3,10 +3,8 @@ import "./ContrastChecker.css";
 
 export default function ContrastChecker({ color }) {
   const [contrastValue, setContrastValue] = useState(null);
-  let score = "";
   const URL = "https://www.aremycolorsaccessible.com/api/are-they";
 
-  console.log(color.hex, color.contrastText);
 
   useEffect(() => {
     async function postFetch() {
@@ -17,10 +15,7 @@ export default function ContrastChecker({ color }) {
           headers: { "Content-Type": "application/json" },
         });
 
-        const data = await response.json();
-        console.log("data: ", data.overall);
-        score = data.overall;
-        console.log("score: ", score);
+        const data = await response.json();   
         setContrastValue(data);
       } catch (error) {
         console.error("Error fetching contrast data: ", error);

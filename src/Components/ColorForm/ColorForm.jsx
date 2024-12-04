@@ -10,7 +10,6 @@ export default function ColorForm({ onSubmitColor, initialData, buttonText }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-   // console.log("data: ", data);
     onSubmitColor(data);
   }
 
