@@ -1,0 +1,15 @@
+.theme-container{
+    display: inline-block;
+    gap: 20px;
+}
+
+.newTheme {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    margin: 15px ;
+    padding: 10px;
+    border: 2px solid rgb(185, 57, 57);
+    border-radius: 15px;
+    background-color: rgb(219, 197, 169);
+}
