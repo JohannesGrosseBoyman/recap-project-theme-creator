@@ -5,7 +5,7 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
-import { useEffect } from "react";
+
 
 function App() {
   const [themes, setThemes] = useLocalStorageState("themes", {
@@ -35,16 +35,12 @@ function App() {
   }
 
   function handleDeleteColorFromTheme(colorId) {
-    console.log("Delete requested for color ID:", colorId);
-
     setThemes((prevThemes) =>
       prevThemes.map((theme) => {
         if (theme.id === selectedThemeId) {
-          console.log("Filtering colors for theme:", theme.name);
           const filteredColors = theme.colors.filter((color) => {
-            return color.id !== colorId;
+          return color.id !== colorId;
           });
-
           return { ...theme, colors: filteredColors };
         }
         return theme;
@@ -52,20 +48,27 @@ function App() {
     );
   }
 
-  function handleEditColorInTheme() {}
+  function handleEditColorInTheme(colorId, changedColor) {
+    setThemes((prevThemes) =>
+      prevThemes.map((theme) => 
+        theme.id === selectedThemeId
+        ? {
+          ...theme,
+          colors: theme.colors.map((color) => 
+          colorId === color.id ? { ...color, ...changedColor} : color
+         )
+        }
+        : theme
+      )
+    );
+  }
 
   function onSubmitColor(data) {
     const newColor = { id: uid(), ...data };
     handleAddColorToTheme(newColor);
   }
 
-  /* function handleEditColor(colorId, changedColor) {
-    const changedColors = colors.map((color) =>
-      color.id === colorId ? { ...color, ...changedColor } : color
-    );
-    setColors(changedColors); 
-  }
-*/
+
   return (
     <>
       <h1>Theme Creator</h1>
