@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import { uid } from "uid";
 import "./MultipleThemes.css"
 import useLocalStorageState from "use-local-storage-state";
