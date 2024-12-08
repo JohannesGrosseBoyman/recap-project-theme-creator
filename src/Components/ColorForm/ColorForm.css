@@ -2,12 +2,12 @@
     max-width: 95%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     margin-bottom: 20px;
     margin-right: 20px;
-    padding: 10px;
+    padding: 10px 5px;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: rgb(139, 84, 12);
+    background-color: rgb(80, 77, 74);
     
 }
