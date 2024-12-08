@@ -49,32 +49,26 @@ function App() {
   }
 
   function handleDeleteColorFromTheme(colorId) {
-    setThemes((prevThemes) =>
-      prevThemes.map((theme) => {
-        if (theme.id === selectedThemeId) {
-          const filteredColors = theme.colors.filter((color) => {
-            return color.id !== colorId;
-          });
-          return { ...theme, colors: filteredColors };
-        }
-        return theme;
-      })
+    const updatedThemes = themes.map((theme) =>
+        theme.id === selectedThemeId
+        ? { ...theme, colors: theme.colors.filter((color) =>
+          color.id !== colorId)}
+        : theme
     );
+    setThemes(updatedThemes);
   }
 
   function handleEditColorInTheme(colorId, changedColor) {
-    setThemes((prevThemes) =>
-      prevThemes.map((theme) =>
+    const updatedThemes = themes.map((theme) => 
         theme.id === selectedThemeId
-          ? {
-              ...theme,
-              colors: theme.colors.map((color) =>
-                colorId === color.id ? { ...color, ...changedColor } : color
-              ),
-            }
-          : theme
-      )
-    );
+        ? { ...theme, colors: theme.colors.map((color) =>
+            colorId === color.id ? { ...color, ...changedColor } 
+                                 : color 
+                                ),
+           }
+           : theme
+      );
+      setThemes(updatedThemes);
   }
 
   function onSubmitColor(data) {
