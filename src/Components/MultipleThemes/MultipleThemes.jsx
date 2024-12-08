@@ -10,6 +10,7 @@ export default function MultipleThemes({
   handleThemeSelect,
   handleAddTheme,
   onEditTheme,
+  onDeleteTheme,
 }) {
   const [newThemeName, setNewThemeName] = useLocalStorageState("newThemeName", {
     defaultValue: "",
@@ -18,6 +19,7 @@ export default function MultipleThemes({
   const themeName = currentTheme?.name || "Unknown Theme";
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   function handleInputValue(event) {
     setNewThemeName(event.target.value);
@@ -54,6 +56,7 @@ export default function MultipleThemes({
   }
 
   function handleEditTheme() {
+    setNewThemeName(themeName);
     setIsEditing(true);
   }
 
@@ -67,7 +70,18 @@ export default function MultipleThemes({
     setIsEditing(false);}
   }
 
-  function handeleDeleteTheme() {}
+  function handeleDeleteTheme() {
+    setIsDeleting(true);
+  }
+
+function cancelDelete() {
+    setIsDeleting(false);
+}
+
+function confirmDelete(selectedThemeId) {
+    onDeleteTheme(selectedThemeId);
+    setIsDeleting(false);
+}
 
   return (
     <div className="theme-container">
@@ -89,13 +103,13 @@ export default function MultipleThemes({
       <div className="newTheme">
         <button onClick={addTheme}>Add a new Theme</button>
         <button
-          onClick={() => handleEditTheme}
+          onClick={handleEditTheme}
           disabled={selectedThemeId === initialThemes[0].id}
         >
           Edit the Theme
         </button>
         <button
-          onClick={() => handeleDeleteTheme}
+          onClick={handeleDeleteTheme}
           disabled={selectedThemeId === initialThemes[0].id}
         >
           Delete the Theme
@@ -134,6 +148,12 @@ export default function MultipleThemes({
               </button>
             </div>
           </>
+        ) : isDeleting ? (
+            <>
+            <p>Really delete Theme: {themeName}?</p>
+            <button onClick={cancelDelete} >No</button>
+            <button onClick={() => confirmDelete(selectedThemeId)}  >Delete Theme {themeName}</button>
+            </>
         ) : (
           <p></p>
         )}
