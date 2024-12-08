@@ -25,6 +25,15 @@ function App() {
     setSelectedThemeId(newTheme.id);
   }
 
+  function handleEditThemeName(newThemeName, selectedThemeId) {
+    const updatedThemes = themes.map((theme) =>
+      theme.id === selectedThemeId
+        ? { ...theme, name: newThemeName }
+        : theme
+    );
+    setThemes(updatedThemes);
+  }
+
   function handleAddColorToTheme(newColor) {
     const updatedThemes = themes.map((theme) =>
       theme.id === selectedThemeId
@@ -77,6 +86,7 @@ function App() {
         selectedThemeId={selectedThemeId}
         handleThemeSelect={handleThemeSelect}
         handleAddTheme={handleAddTheme}
+        onEditTheme={handleEditThemeName}
       />
       <ColorForm onSubmitColor={onSubmitColor} buttonText={"Add color"} />
       <div className="color-container">
