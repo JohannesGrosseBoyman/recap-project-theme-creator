@@ -6,7 +6,6 @@ import "./App.css";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
 
-
 function App() {
   const [themes, setThemes] = useLocalStorageState("themes", {
     defaultValue: initialThemes,
@@ -27,11 +26,17 @@ function App() {
 
   function handleEditThemeName(newThemeName, selectedThemeId) {
     const updatedThemes = themes.map((theme) =>
-      theme.id === selectedThemeId
-        ? { ...theme, name: newThemeName }
-        : theme
+      theme.id === selectedThemeId ? { ...theme, name: newThemeName } : theme
     );
     setThemes(updatedThemes);
+  }
+
+  function handleDeleteThemeName(selectedThemeId) {
+    const updatedThemes = themes.filter(
+      (theme) => theme.id !== selectedThemeId
+    );
+    setThemes(updatedThemes);
+    setSelectedThemeId("t1");
   }
 
   function handleAddColorToTheme(newColor) {
@@ -48,7 +53,7 @@ function App() {
       prevThemes.map((theme) => {
         if (theme.id === selectedThemeId) {
           const filteredColors = theme.colors.filter((color) => {
-          return color.id !== colorId;
+            return color.id !== colorId;
           });
           return { ...theme, colors: filteredColors };
         }
@@ -59,15 +64,15 @@ function App() {
 
   function handleEditColorInTheme(colorId, changedColor) {
     setThemes((prevThemes) =>
-      prevThemes.map((theme) => 
+      prevThemes.map((theme) =>
         theme.id === selectedThemeId
-        ? {
-          ...theme,
-          colors: theme.colors.map((color) => 
-          colorId === color.id ? { ...color, ...changedColor} : color
-         )
-        }
-        : theme
+          ? {
+              ...theme,
+              colors: theme.colors.map((color) =>
+                colorId === color.id ? { ...color, ...changedColor } : color
+              ),
+            }
+          : theme
       )
     );
   }
@@ -76,7 +81,6 @@ function App() {
     const newColor = { id: uid(), ...data };
     handleAddColorToTheme(newColor);
   }
-
 
   return (
     <>
@@ -87,6 +91,7 @@ function App() {
         handleThemeSelect={handleThemeSelect}
         handleAddTheme={handleAddTheme}
         onEditTheme={handleEditThemeName}
+        onDeleteTheme={handleDeleteThemeName}
       />
       <ColorForm onSubmitColor={onSubmitColor} buttonText={"Add color"} />
       <div className="color-container">
