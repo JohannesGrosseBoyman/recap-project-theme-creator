@@ -14,7 +14,9 @@ export default function ColorForm({ onSubmitColor, initialData, buttonText }) {
   }
 
   return (
+    <>
     <form className="color-form" onSubmit={handleSubmit}>
+    <h2>Add a new color to your Theme</h2>
       <label htmlFor="role">
         Role
         <br />
@@ -40,5 +42,6 @@ export default function ColorForm({ onSubmitColor, initialData, buttonText }) {
       <br />
       <button type="submit">{buttonText}</button>
     </form>
+    </>
   );
 }

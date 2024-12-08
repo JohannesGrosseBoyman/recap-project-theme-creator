@@ -5,5 +5,9 @@
     gap: 10px;
     margin-bottom: 20px;
     margin-right: 20px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: rgb(139, 84, 12);
     
 }
