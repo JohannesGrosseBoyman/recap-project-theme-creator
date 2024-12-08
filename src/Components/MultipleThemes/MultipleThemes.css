@@ -1,6 +1,12 @@
 .theme-container{
+    width: 95%;
     display: inline-block;
     gap: 20px;
+    border: 2px solid black;
+    padding: 10px;
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .newTheme {
